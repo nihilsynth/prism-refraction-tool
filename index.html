@@ -1,0 +1,35 @@
+<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Prism Solver v3</title>
+<style>body{font-family:Arial;background:#f6f7fb;margin:0;padding:20px}.card{max-width:860px;margin:auto;background:#fff;padding:18px;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.1)}.row{display:grid;grid-template-columns:220px 1fr;gap:10px;margin:8px 0}input{padding:8px;border:1px solid #bbb;border-radius:6px}button{padding:10px 14px;border:0;border-radius:8px;background:#2d6df6;color:#fff;font-weight:700;cursor:pointer;margin-right:8px}.muted{color:#666;font-size:13px}.ok{background:#e8f7e8;border-left:4px solid #3aa14a;padding:10px;margin-top:10px;display:none}.err{background:#ffeaea;border-left:4px solid #d33;padding:10px;margin-top:10px;display:none}.calc{background:#eef8ee;font-weight:700}</style>
+</head><body><div class='card'>
+<h2>Prism Refraction Solver (Exam Labels)</h2><p class='muted'>Enter <b>i₁</b>, <b>A</b>, <b>n</b> then press <b>Update</b>.</p>
+<div class='row'><label>i₁ (incident angle, °)</label><input id='i1' type='number' step='0.01' placeholder='40'></div>
+<div class='row'><label>A (apical angle, °)</label><input id='A' type='number' step='0.01' placeholder='50'></div>
+<div class='row'><label>n (refractive index)</label><input id='n' type='number' step='0.001' placeholder='1.58'></div>
+<hr>
+<div class='row'><label>r₁ (°)</label><input id='r1' readonly></div>
+<div class='row'><label>r₂ (°)</label><input id='r2' readonly></div>
+<div class='row'><label>i₂ (emergent angle, °)</label><input id='i2' readonly></div>
+<div class='row'><label>δ total deviation (°)</label><input id='D' readonly></div>
+<button onclick='solve()'>Update</button><button onclick='resetAll()' style='background:#888'>Reset</button>
+<div id='ok' class='ok'></div><div id='err' class='err'></div>
+<p class='muted'>Formulas: sin(i₁)=n·sin(r₁), A=r₁+r₂, n·sin(r₂)=sin(i₂), δ=i₁+i₂−A</p>
+</div>
+<script>
+function rad(d){return d*Math.PI/180} function deg(r){return r*180/Math.PI}
+function by(id){return document.getElementById(id)}
+function show(id,msg){by('ok').style.display='none';by('err').style.display='none';by(id).innerHTML=msg;by(id).style.display='block'}
+function setv(id,v){var e=by(id);e.value=Number(v).toFixed(2);e.className='calc'}
+function clearOut(){['r1','r2','i2','D'].forEach(function(k){by(k).value='';by(k).className=''})}
+function solve(){clearOut();
+  var i1=parseFloat(by('i1').value), A=parseFloat(by('A').value), n=parseFloat(by('n').value);
+  if(isNaN(i1)||isNaN(A)||isNaN(n)){show('err','Enter i₁, A, n first.');return}
+  if(n<=1){show('err','n must be > 1');return}
+  var s1=Math.sin(rad(i1))/n; if(Math.abs(s1)>1){show('err','No real solution at first face.');return}
+  var r1=deg(Math.asin(s1)); var r2=A-r1; if(r2<=0){show('err','Invalid geometry: r₂ <= 0');return}
+  var s2=n*Math.sin(rad(r2)); if(Math.abs(s2)>1){setv('r1',r1);setv('r2',r2);show('err','Total internal reflection at second face.');return}
+  var i2=deg(Math.asin(s2)); var D=i1+i2-A;
+  setv('r1',r1); setv('r2',r2); setv('i2',i2); setv('D',D);
+  show('ok','✓ Solved: r₁='+r1.toFixed(2)+'°, r₂='+r2.toFixed(2)+'°, i₂='+i2.toFixed(2)+'°, δ='+D.toFixed(2)+'°');
+}
+function resetAll(){['i1','A','n','r1','r2','i2','D'].forEach(function(k){by(k).value='';by(k).className=''});by('ok').style.display='none';by('err').style.display='none'}
+</script></body></html>
