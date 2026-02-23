@@ -3,77 +3,89 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Prism Refraction – Clean Exam Diagram</title>
+  <title>Prism Refraction (Matched Diagram)</title>
   <style>
-    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#fff;padding:12px}
-    .wrap{max-width:820px;margin:0 auto}
-    h2{margin:0 0 8px;font-size:1.2rem}
-    .muted{color:#444;font-size:13px;margin:0 0 10px}
-    svg{width:100%;height:auto;border:1px solid #ccc}
-    .panel{margin-top:12px;padding:10px;border:1px solid #ddd}
-    .row{display:grid;grid-template-columns:1fr 130px;gap:10px;align-items:center;margin:8px 0}
-    input{width:100%;padding:8px;border:1px solid #aaa;border-radius:4px;font-size:16px}
-    .calc{background:#f0f8f0;font-weight:700}
-    button{padding:10px 14px;border:0;background:#0b57d0;color:#fff;border-radius:6px;font-weight:700;margin-right:8px}
-    button.secondary{background:#666}
-    .msg{margin-top:10px;padding:8px;border-left:4px solid #0b57d0;background:#f5f9ff;display:none}
+    body{font-family:Arial,Helvetica,sans-serif;margin:0;background:#fff;padding:10px}
+    .wrap{max-width:860px;margin:0 auto}
+    h2{margin:0 0 6px;font-size:1.15rem}
+    .muted{font-size:12px;color:#555;margin:0 0 10px}
+    svg{width:100%;height:auto;border:1px solid #ddd;background:#fff;border-radius:6px}
+    .panel{margin-top:10px;padding:10px;border:1px solid #ddd;border-radius:6px}
+    .row{display:grid;grid-template-columns:1fr 125px;gap:10px;align-items:center;margin:8px 0}
+    input{width:100%;padding:8px;border:1px solid #aaa;border-radius:6px;font-size:16px;min-width:0}
+    input.calc{background:#eef8ee;font-weight:700}
+    .btn{width:100%;padding:11px;border:0;border-radius:8px;background:#1457d5;color:#fff;font-weight:700;font-size:16px;margin-top:8px}
+    .btn.secondary{background:#777}
+    .ok,.err{padding:9px;border-radius:6px;margin-top:10px;display:none}
+    .ok{background:#e8f7e8;border-left:4px solid #2f9b3f}
+    .err{background:#ffeaea;border-left:4px solid #cf2f2f}
+    .eq{font-size:14px;line-height:1.45}
     @media(max-width:640px){.row{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 <div class="wrap">
-  <h2>Prism Refraction Solver (Clean Exam Style)</h2>
-  <p class="muted">Exact notation: i₁, r₁, r₂, i₂, A, n, n′. Minimal styling.</p>
+  <h2>Prism Refraction Solver (matched to your sketch)</h2>
+  <p class="muted">Same visual style/labels: i₁, r₁, d₁, d₂, i₂, A, n, n′</p>
 
-  <svg viewBox="0 0 760 520" aria-label="Prism diagram">
-    <defs><marker id="arr" markerWidth="9" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 9 3, 0 6" fill="#000"/></marker></defs>
+  <svg viewBox="0 0 760 560" aria-label="Matched prism diagram">
+    <defs>
+      <marker id="arrBlue" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2d57d8"/></marker>
+      <marker id="arrGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2f9b63"/></marker>
+      <marker id="arrRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d34a65"/></marker>
+    </defs>
 
     <!-- prism -->
-    <polygon points="380,70 600,430 160,430" fill="none" stroke="#000" stroke-width="3"/>
+    <polygon points="380,70 610,470 150,470" fill="none" stroke="#333" stroke-width="3"/>
 
-    <!-- ray path -->
-    <line x1="20" y1="280" x2="255" y2="300" stroke="#000" stroke-width="3" marker-end="url(#arr)"/>
-    <line x1="255" y1="300" x2="470" y2="300" stroke="#000" stroke-width="3" marker-end="url(#arr)"/>
-    <line x1="470" y1="300" x2="740" y2="340" stroke="#000" stroke-width="3" marker-end="url(#arr)"/>
+    <!-- rays (coloured like your photo) -->
+    <line x1="20" y1="300" x2="255" y2="320" stroke="#2d57d8" stroke-width="4" marker-end="url(#arrBlue)"/>
+    <line x1="255" y1="320" x2="470" y2="320" stroke="#2f9b63" stroke-width="4" marker-end="url(#arrGreen)"/>
+    <line x1="470" y1="320" x2="740" y2="370" stroke="#d34a65" stroke-width="4" marker-end="url(#arrRed)"/>
 
-    <!-- normals at points of incidence/emergence -->
-    <line x1="255" y1="210" x2="255" y2="390" stroke="#000" stroke-width="2" stroke-dasharray="8 8"/>
-    <line x1="470" y1="210" x2="470" y2="390" stroke="#000" stroke-width="2" stroke-dasharray="8 8"/>
+    <!-- dashed outer continuation lines -->
+    <line x1="80" y1="245" x2="205" y2="300" stroke="#666" stroke-width="2" stroke-dasharray="10 10"/>
+    <line x1="515" y1="300" x2="640" y2="245" stroke="#666" stroke-width="2" stroke-dasharray="10 10"/>
 
-    <!-- central dashed helper like classroom sketch -->
-    <line x1="325" y1="340" x2="380" y2="470" stroke="#000" stroke-width="1.5" stroke-dasharray="8 8"/>
-    <line x1="435" y1="340" x2="380" y2="470" stroke="#000" stroke-width="1.5" stroke-dasharray="8 8"/>
+    <!-- dashed central helper lines -->
+    <line x1="255" y1="250" x2="520" y2="250" stroke="#5563d4" stroke-width="2" stroke-dasharray="10 10" opacity="0.8"/>
+    <line x1="255" y1="320" x2="380" y2="500" stroke="#666" stroke-width="2" stroke-dasharray="10 10"/>
+    <line x1="470" y1="320" x2="380" y2="500" stroke="#666" stroke-width="2" stroke-dasharray="10 10"/>
 
-    <!-- angle arcs + labels -->
-    <path d="M212,287 A44,44 0 0 1 254,262" fill="none" stroke="#000" stroke-width="2"/>
-    <text x="204" y="280" font-size="30">i₁</text>
+    <!-- local normals at both interfaces -->
+    <line x1="255" y1="235" x2="255" y2="405" stroke="#666" stroke-width="2" stroke-dasharray="10 10"/>
+    <line x1="470" y1="235" x2="470" y2="405" stroke="#666" stroke-width="2" stroke-dasharray="10 10"/>
 
-    <path d="M255,300 A42,42 0 0 1 292,332" fill="none" stroke="#000" stroke-width="2"/>
-    <text x="287" y="340" font-size="28">r₁</text>
+    <!-- apex angle -->
+    <path d="M338,150 A70,70 0 0 0 422,150" fill="none" stroke="#333" stroke-width="4"/>
+    <text x="380" y="136" text-anchor="middle" font-size="42" font-weight="700" fill="#333">A</text>
 
-    <path d="M470,300 A42,42 0 0 1 433,332" fill="none" stroke="#000" stroke-width="2"/>
-    <text x="423" y="340" font-size="28">r₂</text>
+    <!-- angle arcs/labels -->
+    <path d="M215,297 A48,48 0 0 1 255,270" fill="none" stroke="#2d57d8" stroke-width="4"/>
+    <text x="205" y="288" fill="#2d57d8" font-size="36" font-weight="700">i₁</text>
 
-    <path d="M470,300 A52,52 0 0 1 515,338" fill="none" stroke="#000" stroke-width="2"/>
-    <text x="518" y="347" font-size="30">i₂</text>
+    <path d="M255,320 A42,42 0 0 1 291,352" fill="none" stroke="#2f9b63" stroke-width="4"/>
+    <text x="285" y="360" fill="#2f9b63" font-size="32" font-weight="700">r₁</text>
 
-    <!-- optional deviation labels as in provided sketch -->
-    <text x="320" y="286" font-size="28">d₁</text>
-    <text x="516" y="286" font-size="28">d₂</text>
+    <text x="320" y="305" fill="#4f62ff" font-size="34" font-weight="700">d₁</text>
 
-    <!-- apex angle A -->
-    <path d="M340,150 A70,70 0 0 0 420,150" fill="none" stroke="#000" stroke-width="3"/>
-    <text x="380" y="136" text-anchor="middle" font-size="42">A</text>
+    <path d="M470,320 A42,42 0 0 1 434,352" fill="none" stroke="#2f9b63" stroke-width="4"/>
+    <text x="424" y="360" fill="#2f9b63" font-size="32" font-weight="700">r₂</text>
 
-    <!-- n and n' -->
-    <text x="170" y="420" font-size="34">n</text>
-    <text x="198" y="425" font-size="26">n′</text>
-    <text x="585" y="420" font-size="34">n</text>
-    <text x="613" y="425" font-size="26">n′</text>
+    <text x="516" y="305" fill="#d34a65" font-size="34" font-weight="700">d₂</text>
+
+    <path d="M470,320 A56,56 0 0 1 520,360" fill="none" stroke="#d34a65" stroke-width="4"/>
+    <text x="525" y="365" fill="#d34a65" font-size="36" font-weight="700">i₂</text>
+
+    <!-- n / n' corner notes -->
+    <text x="168" y="458" fill="#2d57d8" font-size="38" font-weight="700">n</text>
+    <text x="198" y="462" fill="#2d57d8" font-size="30" font-weight="700">n′</text>
+    <text x="585" y="458" fill="#2d57d8" font-size="38" font-weight="700">n</text>
+    <text x="615" y="462" fill="#2d57d8" font-size="30" font-weight="700">n′</text>
   </svg>
 
-  <div class="panel">
-    <div>Equations:</div>
+  <div class="panel eq">
+    <div><b>Equations:</b></div>
     <div>1) sin(i₁) = n·sin(r₁)</div>
     <div>2) A = r₁ + r₂</div>
     <div>3) n·sin(r₂) = sin(i₂)</div>
@@ -89,8 +101,10 @@
     <div class="row"><label>r₂ (°)</label><input id="r2" readonly></div>
     <div class="row"><label>i₂ (°)</label><input id="i2" readonly></div>
     <div class="row"><label>δ (°)</label><input id="D" readonly></div>
-    <button onclick="solve()">Update</button><button class="secondary" onclick="resetAll()">Reset</button>
-    <div id="msg" class="msg"></div>
+    <button class="btn" onclick="solve()">Update</button>
+    <button class="btn secondary" onclick="resetAll()">Reset</button>
+    <div id="ok" class="ok"></div>
+    <div id="err" class="err"></div>
   </div>
 </div>
 
@@ -99,20 +113,20 @@ function rad(d){return d*Math.PI/180} function deg(r){return r*180/Math.PI}
 const by=id=>document.getElementById(id)
 function setCalc(id,v){const e=by(id); e.value=Number(v).toFixed(2); e.classList.add('calc')}
 function clearCalc(){['r1','r2','i2','D'].forEach(id=>{by(id).value='';by(id).classList.remove('calc')})}
-function msg(t){const m=by('msg');m.style.display='block';m.textContent=t}
+function show(type,text){by('ok').style.display='none';by('err').style.display='none';const el=by(type);el.textContent=text;el.style.display='block'}
 function solve(){
   clearCalc();
-  const i1=parseFloat(by('i1').value), A=parseFloat(by('A').value), n=parseFloat(by('n').value)
-  if([i1,A,n].some(Number.isNaN)){msg('Enter i₁, A, n first.');return}
-  if(n<=1){msg('n must be > 1');return}
-  const s1=Math.sin(rad(i1))/n; if(Math.abs(s1)>1){msg('No real solution at first face.');return}
-  const r1=deg(Math.asin(s1)); const r2=A-r1; if(r2<=0){msg('Invalid geometry (r₂ <= 0).');return}
-  const s2=n*Math.sin(rad(r2)); if(Math.abs(s2)>1){setCalc('r1',r1);setCalc('r2',r2);msg('Total internal reflection at second face.');return}
-  const i2=deg(Math.asin(s2)); const D=i1+i2-A
-  setCalc('r1',r1); setCalc('r2',r2); setCalc('i2',i2); setCalc('D',D)
-  msg(`Solved: r₁=${r1.toFixed(2)}°, r₂=${r2.toFixed(2)}°, i₂=${i2.toFixed(2)}°, δ=${D.toFixed(2)}°`)
+  const i1=parseFloat(by('i1').value), A=parseFloat(by('A').value), n=parseFloat(by('n').value);
+  if([i1,A,n].some(Number.isNaN)){show('err','Enter i₁, A, n first.');return}
+  if(n<=1){show('err','n must be > 1');return}
+  const s1=Math.sin(rad(i1))/n; if(Math.abs(s1)>1){show('err','No real solution at first face.');return}
+  const r1=deg(Math.asin(s1)); const r2=A-r1; if(r2<=0){show('err','Invalid geometry (r₂ <= 0).');return}
+  const s2=n*Math.sin(rad(r2)); if(Math.abs(s2)>1){setCalc('r1',r1);setCalc('r2',r2);show('err','Total internal reflection at second face.');return}
+  const i2=deg(Math.asin(s2)); const D=i1+i2-A;
+  setCalc('r1',r1); setCalc('r2',r2); setCalc('i2',i2); setCalc('D',D);
+  show('ok',`Solved: r₁=${r1.toFixed(2)}°, r₂=${r2.toFixed(2)}°, i₂=${i2.toFixed(2)}°, δ=${D.toFixed(2)}°`)
 }
-function resetAll(){['i1','A','n','r1','r2','i2','D'].forEach(id=>{by(id).value='';by(id).classList.remove('calc')}); by('msg').style.display='none'}
+function resetAll(){['i1','A','n','r1','r2','i2','D'].forEach(id=>{by(id).value='';by(id).classList.remove('calc')});by('ok').style.display='none';by('err').style.display='none'}
 </script>
 </body>
 </html>
