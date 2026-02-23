@@ -1,118 +1,43 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Prism Refraction (Trace)</title>
+<title>Prism Refraction (Exact Reference)</title>
 <style>
-body{font-family:Arial,sans-serif;background:#fff;margin:0;padding:10px}
+body{font-family:Arial,sans-serif;margin:0;background:#fff;padding:10px}
 .wrap{max-width:860px;margin:0 auto}
-h2{margin:0 0 6px;font-size:1.1rem}
-.muted{font-size:12px;color:#666;margin:0 0 10px}
-svg{width:100%;height:auto;border:1px solid #ddd;border-radius:6px;background:#fff}
+h2{margin:0 0 6px;font-size:1.1rem}.muted{font-size:12px;color:#555;margin:0 0 10px}
+img{width:100%;height:auto;border:1px solid #ddd;border-radius:6px;display:block}
 .panel{margin-top:10px;border:1px solid #ddd;border-radius:6px;padding:10px}
 .row{display:grid;grid-template-columns:1fr 120px;gap:10px;align-items:center;margin:8px 0}
 input{width:100%;padding:8px;border:1px solid #aaa;border-radius:6px;font-size:16px}
 input.calc{background:#eef8ee;font-weight:700}
 button{width:100%;padding:10px;border:0;border-radius:8px;background:#1457d5;color:#fff;font-weight:700;font-size:16px;margin-top:8px}
 button.secondary{background:#777}
-.msg{margin-top:10px;padding:8px;border-radius:6px;display:none}
-.ok{background:#e8f7e8;border-left:4px solid #2f9b3f}.err{background:#ffeaea;border-left:4px solid #cf2f2f}
+.msg{margin-top:10px;padding:8px;border-radius:6px;display:none}.ok{background:#e8f7e8;border-left:4px solid #2f9b3f}.err{background:#ffeaea;border-left:4px solid #cf2f2f}
 @media(max-width:640px){.row{grid-template-columns:1fr}}
-</style></head><body>
-<div class="wrap">
-  <h2>Prism Refraction Solver (literal trace)</h2>
-  <p class="muted">Traced to match your sketch style/labels.</p>
-
-  <svg viewBox="0 0 760 560" aria-label="Literal traced prism diagram">
-    <defs>
-      <marker id="arrB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2c5bda"/></marker>
-      <marker id="arrG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#2a9b64"/></marker>
-      <marker id="arrR" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0,10 3.5,0 7" fill="#d84a6a"/></marker>
-    </defs>
-
-    <!-- prism outline -->
-    <polygon points="380,72 610,470 150,470" fill="none" stroke="#3a3a3a" stroke-width="3"/>
-
-    <!-- rays -->
-    <line x1="10" y1="336" x2="255" y2="320" stroke="#2c5bda" stroke-width="4" marker-end="url(#arrB)"/>
-    <line x1="255" y1="320" x2="470" y2="320" stroke="#2a9b64" stroke-width="4" marker-end="url(#arrG)"/>
-    <line x1="470" y1="320" x2="750" y2="385" stroke="#d84a6a" stroke-width="4" marker-end="url(#arrR)"/>
-
-    <!-- external dashed guide lines -->
-    <line x1="68" y1="250" x2="208" y2="315" stroke="#6e6e6e" stroke-width="2" stroke-dasharray="12 10"/>
-    <line x1="520" y1="315" x2="660" y2="250" stroke="#6e6e6e" stroke-width="2" stroke-dasharray="12 10"/>
-
-    <!-- local dashed normals at interfaces -->
-    <line x1="255" y1="242" x2="255" y2="420" stroke="#6e6e6e" stroke-width="2" stroke-dasharray="10 9"/>
-    <line x1="470" y1="242" x2="470" y2="420" stroke="#6e6e6e" stroke-width="2" stroke-dasharray="10 9"/>
-
-    <!-- interior dashed scaffold from interface points to bottom apex -->
-    <line x1="255" y1="320" x2="380" y2="510" stroke="#777" stroke-width="2" stroke-dasharray="12 10"/>
-    <line x1="470" y1="320" x2="380" y2="510" stroke="#777" stroke-width="2" stroke-dasharray="12 10"/>
-
-    <!-- little top dashed hint near d1/d2 like sketch -->
-    <line x1="310" y1="286" x2="430" y2="286" stroke="#5a67db" stroke-width="2" stroke-dasharray="10 9"/>
-
-    <!-- apex angle A -->
-    <path d="M338,152 A70,70 0 0 0 422,152" fill="none" stroke="#3a3a3a" stroke-width="4"/>
-    <text x="380" y="137" text-anchor="middle" font-size="42" fill="#333" font-weight="700">A</text>
-
-    <!-- left arcs and labels -->
-    <path d="M210,313 A45,45 0 0 1 255,286" fill="none" stroke="#2c5bda" stroke-width="4"/>
-    <text x="200" y="304" fill="#2c5bda" font-size="36" font-weight="700">i₁</text>
-
-    <path d="M255,320 A42,42 0 0 1 292,354" fill="none" stroke="#2a9b64" stroke-width="4"/>
-    <text x="286" y="364" fill="#2a9b64" font-size="32" font-weight="700">r₁</text>
-
-    <text x="318" y="308" fill="#4f63df" font-size="36" font-weight="700">d₁</text>
-
-    <!-- right arcs and labels -->
-    <path d="M470,320 A44,44 0 0 1 432,354" fill="none" stroke="#2a9b64" stroke-width="4"/>
-    <text x="420" y="364" fill="#2a9b64" font-size="32" font-weight="700">i₂</text>
-
-    <text x="516" y="308" fill="#d84a6a" font-size="36" font-weight="700">d₂</text>
-
-    <path d="M470,320 A58,58 0 0 1 522,360" fill="none" stroke="#d84a6a" stroke-width="4"/>
-    <text x="525" y="368" fill="#d84a6a" font-size="38" font-weight="700">i₂</text>
-
-    <!-- n / n' -->
-    <text x="168" y="460" fill="#2c5bda" font-size="40" font-weight="700">n</text>
-    <text x="198" y="464" fill="#2c5bda" font-size="30" font-weight="700">n′</text>
-    <text x="585" y="460" fill="#2c5bda" font-size="40" font-weight="700">n</text>
-    <text x="615" y="464" fill="#2c5bda" font-size="30" font-weight="700">n′</text>
-  </svg>
-
-  <div class="panel">
-    <div><b>Equations:</b> sin(i₁)=n·sin(r₁), A=r₁+r₂, n·sin(r₂)=sin(i₂), δ=i₁+i₂−A</div>
-  </div>
-
-  <div class="panel">
-    <div class="row"><label>i₁ (°)</label><input id="i1" type="number" step="0.01" placeholder="40"></div>
-    <div class="row"><label>A (°)</label><input id="A" type="number" step="0.01" placeholder="50"></div>
-    <div class="row"><label>n</label><input id="n" type="number" step="0.001" placeholder="1.58"></div>
-    <hr>
-    <div class="row"><label>r₁ (°)</label><input id="r1" readonly></div>
-    <div class="row"><label>r₂ (°)</label><input id="r2" readonly></div>
-    <div class="row"><label>i₂ (°)</label><input id="i2" readonly></div>
-    <div class="row"><label>δ (°)</label><input id="D" readonly></div>
-    <button onclick="solve()">Update</button>
-    <button class="secondary" onclick="resetAll()">Reset</button>
-    <div id="ok" class="msg ok"></div><div id="err" class="msg err"></div>
-  </div>
-</div>
+</style></head><body><div class="wrap">
+<h2>Prism Refraction Solver (exact diagram reference)</h2>
+<p class="muted">Using your exact uploaded diagram image; formulas/values below cross-reference i₁, r₁, r₂, i₂, d₁, d₂, A, n/n′.</p>
+<img src="diagram-reference.png" alt="Reference prism diagram">
+<div class="panel"><div><b>Equations:</b> 1) sin(i₁)=n·sin(r₁)  2) A=r₁+r₂  3) n·sin(r₂)=sin(i₂)  4) δ=i₁+i₂−A</div></div>
+<div class="panel">
+<div class="row"><label>i₁ (°)</label><input id="i1" type="number" step="0.01" placeholder="40"></div>
+<div class="row"><label>A (°)</label><input id="A" type="number" step="0.01" placeholder="50"></div>
+<div class="row"><label>n</label><input id="n" type="number" step="0.001" placeholder="1.58"></div><hr>
+<div class="row"><label>r₁ (°)</label><input id="r1" readonly></div>
+<div class="row"><label>r₂ (°)</label><input id="r2" readonly></div>
+<div class="row"><label>i₂ (°)</label><input id="i2" readonly></div>
+<div class="row"><label>δ (°)</label><input id="D" readonly></div>
+<button onclick="solve()">Update</button><button class="secondary" onclick="resetAll()">Reset</button>
+<div id="ok" class="msg ok"></div><div id="err" class="msg err"></div>
+</div></div>
 <script>
-const by=id=>document.getElementById(id);const rad=d=>d*Math.PI/180;const deg=r=>r*180/Math.PI;
-function setCalc(id,v){const e=by(id);e.value=Number(v).toFixed(2);e.classList.add('calc')}
-function clearOut(){['r1','r2','i2','D'].forEach(k=>{by(k).value='';by(k).classList.remove('calc')});by('ok').style.display='none';by('err').style.display='none'}
+const by=id=>document.getElementById(id),rad=d=>d*Math.PI/180,deg=r=>r*180/Math.PI;
+function setv(id,v){const e=by(id);e.value=Number(v).toFixed(2);e.classList.add('calc')} function clear(){['r1','r2','i2','D'].forEach(k=>{by(k).value='';by(k).classList.remove('calc')});by('ok').style.display='none';by('err').style.display='none'}
 function show(id,t){by(id).textContent=t;by(id).style.display='block'}
-function solve(){clearOut();const i1=parseFloat(by('i1').value),A=parseFloat(by('A').value),n=parseFloat(by('n').value);
- if([i1,A,n].some(Number.isNaN)){show('err','Enter i₁, A, n first.');return}
- if(n<=1){show('err','n must be > 1');return}
- const s1=Math.sin(rad(i1))/n; if(Math.abs(s1)>1){show('err','No real solution at first face.');return}
- const r1=deg(Math.asin(s1)); const r2=A-r1; if(r2<=0){show('err','Invalid geometry (r₂ <= 0).');return}
- const s2=n*Math.sin(rad(r2)); if(Math.abs(s2)>1){setCalc('r1',r1);setCalc('r2',r2);show('err','Total internal reflection at second face.');return}
- const i2=deg(Math.asin(s2)); const D=i1+i2-A;
- setCalc('r1',r1);setCalc('r2',r2);setCalc('i2',i2);setCalc('D',D);
- show('ok',`Solved: r₁=${r1.toFixed(2)}°, r₂=${r2.toFixed(2)}°, i₂=${i2.toFixed(2)}°, δ=${D.toFixed(2)}°`);
-}
+function solve(){clear();const i1=parseFloat(by('i1').value),A=parseFloat(by('A').value),n=parseFloat(by('n').value);if([i1,A,n].some(Number.isNaN)){show('err','Enter i₁, A, n first.');return}if(n<=1){show('err','n must be > 1');return}
+const s1=Math.sin(rad(i1))/n;if(Math.abs(s1)>1){show('err','No real solution at first face.');return}
+const r1=deg(Math.asin(s1)),r2=A-r1;if(r2<=0){show('err','Invalid geometry (r₂ <= 0).');return}
+const s2=n*Math.sin(rad(r2));if(Math.abs(s2)>1){setv('r1',r1);setv('r2',r2);show('err','Total internal reflection at second face.');return}
+const i2=deg(Math.asin(s2)),D=i1+i2-A;setv('r1',r1);setv('r2',r2);setv('i2',i2);setv('D',D);show('ok',`Solved: r₁=${r1.toFixed(2)}°, r₂=${r2.toFixed(2)}°, i₂=${i2.toFixed(2)}°, δ=${D.toFixed(2)}°`)}
 function resetAll(){['i1','A','n','r1','r2','i2','D'].forEach(k=>{by(k).value='';by(k).classList.remove('calc')});by('ok').style.display='none';by('err').style.display='none'}
-</script>
-</body></html>
+</script></body></html>
